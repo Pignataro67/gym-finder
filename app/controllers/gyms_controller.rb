@@ -1,7 +1,7 @@
 class GymsController < ApplicationController
 
   before_action :set_gym, only: [:edit, :show, :destroy, :update]
-  before_action :authenticate_required, only: [:new, :show, :create, :destroy, :update, :edit]
+  before_action :authentication_required, only: [:new, :show, :create, :destroy, :update, :edit]
 
   include GymHelper
 
@@ -19,6 +19,15 @@ class GymsController < ApplicationController
   end
 
   def create
+    if is_admin?
+      @gym = Gym.find_by(name: params[:gym][:name], location: params[:gym][:location])
+      if !!@gym
+        flash[:message] = "That Gym already exists!"
+      else
+        flash[:message] = "Sorry you need an admin account to add a Gym"
+      end
+      redirect_to root_path
+    end
   end
 
   def show
@@ -28,8 +37,25 @@ class GymsController < ApplicationController
   end
 
   def update
+    if is_admin? && gym_owner(@gym)
+      if @gym.update(gym_params)
+        redirect_to gym_path(@gym)
+      else
+        render :new
+      end
+    end
   end
 
   def destroy
+    if is_admin? && gym_owner(@gym)
+      @gym.destroy
+      redirect_to root_path
+    end
+  end
+
+  private
+
+  def set_gym
+    @gym = Gym.all.find_by(id: params[:id])
   end
 end
