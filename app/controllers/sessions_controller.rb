@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        flash[:message] = "You have loggied in successfully!"
+        flash[:message] = "You have logged in successfully!"
         redirect_to root_path
       else
         flash[:message] = "Please enter a valid email/password!"
@@ -27,8 +27,14 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.clear
+    redirect_to root_path
   end
 
-  def destroy
+  private 
+
+  def auth
+    request.env['omniauth.auth']
   end
 end
