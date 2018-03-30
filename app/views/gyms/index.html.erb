@@ -1,7 +1,26 @@
 <!--h1>Gyms#index</h1>
 <p>Find me in app/views/gyms/index.html.erb</p-->
+  
+  <% if flash[:message] %>
+  <h2><%= flash[:message] %></h2>
+<%end%>
+
+<div class="gym_list">
+  <h2>Best Gym Classes</h2>
+  <% Gym.best_classes.each do |gym| %>
+  <h3><%= link_to gym.name, gym_path(gym) %></h3>
+  <%end%>
+</div>
+
+<div class="gym_list">
+  <h2>Best Gym PT</h2>
+  <% Gym.best_pt.each do |gym| %>
+  <h3><%= link_to gym.name, gym_path(gym) %></h3>
+  <%end%>
+</div>
+
 <div>
-   <% if @gym != nil %>
+  <% if @gym != nil %>
     <% @gyms.each do |gym| %>
       <%= render partial: "gym", locals: {gym: gym} %>
     <%end%>
