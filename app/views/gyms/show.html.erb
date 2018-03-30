@@ -1,0 +1,10 @@
+<!--h1>Gyms#show</h1>
+<p>Find me in app/views/gyms/show.html.erb</p-->
+
+<% if flash[:message] %>
+<p><%= flash[:message] %></p>
+<%end%>
+
+<%= render partial: "gym", locals: {gym: @gym} %>
+
+<%end%>
