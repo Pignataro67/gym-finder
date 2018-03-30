@@ -1,0 +1,12 @@
+<!--h1>Gyms#edit</h1>
+<p>Find me in app/views/gyms/edit.html.erb</p-->
+<% if is_admin? %>
+
+  <h1>Edit Gym</h1>
+
+    <%= form_for(@gym) do |f| %>
+      <%= render partial: "form", locals: {f: f} %>
+    <h3><%= f.submit %></h3>
+  <%end%>
+<%end%>
+
