@@ -16,6 +16,7 @@ class GymsController < ApplicationController
 
   def new
     @gym = Gym.new
+    @review = @gym.reviews.build
   end
 
   def create
@@ -24,13 +25,18 @@ class GymsController < ApplicationController
       if !!@gym
         flash[:message] = "That Gym already exists!"
       else
-        flash[:message] = "Sorry you need an admin account to add a Gym"
+        @gym = Gym.create(gym_params)
+        add_date_to_review(@gym)
+        @gym.save
       end
-      redirect_to root_path
+    else
+      flash[:message] = "Sorry you need an admin account to add a Gym"
     end
+      redirect_to root_path
   end
 
   def show
+    @review = @gym.reviews.build
   end
 
   def edit
@@ -54,6 +60,10 @@ class GymsController < ApplicationController
   end
 
   private
+
+  def gym_params
+    params.require(:gym).permit(:name, :location, :classes)
+  end
 
   def set_gym
     @gym = Gym.all.find_by(id: params[:id])
