@@ -19,4 +19,21 @@ class ReviewsController < ApplicationController
 
   def edit
   end
+
+  def update
+    if valid_user?(@review)
+      if @review.update(review_params)
+        redirect_to root_path
+      else
+        render :edit
+      end
+    end
+  end
+
+  def destroy
+    if valid_user?(@review)
+      @review.destroy
+      redirect_to root_path
+    end
+  end
 end
