@@ -36,4 +36,14 @@ class ReviewsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:class_rating, :personal_training_rating, :cleanliness_rating, :description, :gym_id, :user_id)
+  end
+
+  def set_review
+    @review = Review.find_by(id: params[:id])
+  end
 end
