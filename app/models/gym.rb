@@ -5,4 +5,24 @@ class Gym < ApplicationRecord
   validates :name, :presence => true
   validates :location, :presence => true
   validates :classes, :presence => true
+
+  def reviews_attributes=(reviews_attributes)
+    reviews_attributes.each do |i, review_attributes|
+      self.reviews.build(review_attributes)
+    end
+  end
+
+  def self.best_gym_classes
+    self.all.select do |gym|
+      gym.name if gym.reveiws.any?{ |review|
+        review.class_rating == 3}
+    end
+  end
+
+  def self.best_gym_pts
+    self.all.select do |gym|
+      gym if gym.reveiws.any?{ |review| 
+        review.pt_rating >= 2}
+    end
+  end
 end
