@@ -14,14 +14,14 @@ class Gym < ApplicationRecord
 
   def self.best_gym_classes
     self.all.select do |gym|
-      gym.name if gym.reveiws.any?{ |review|
+      gym.name if gym.reviews.any?{ |review|
         review.class_rating == 3}
     end
   end
 
   def self.best_gym_pts
     self.all.select do |gym|
-      gym if gym.reveiws.any?{ |review| 
+      gym if gym.reviews.any?{ |review| 
         review.pt_rating >= 2}
     end
   end
