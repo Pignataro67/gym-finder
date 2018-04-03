@@ -7,4 +7,10 @@
 
 <%= render partial: "gym", locals: {gym: @gym} %>
 
+<% if !is_admin? %>
+  <h2>Please Write a Review</h2>
+    <%= form_for(@review) do |f| %>
+  <%= render partial: "fields_for_reviews", locals: {r: f} %>
+    <%= f.submit value="Submit Review" %>
+  <%end%>
 <%end%>
