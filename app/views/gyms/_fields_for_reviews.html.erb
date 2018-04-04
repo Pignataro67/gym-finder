@@ -1,0 +1,22 @@
+<p>
+  <%= r.label :class_rating %>
+  <%= r.select(:class_rating, options_for_select((1..3), 
+  {:selected => @review.class_rating}), :prompt => "Select") %>
+</p>
+<p>
+  <%= r.label :personal_training_rating %>
+  <%= r.select(:personal_training_rating, options_for_select((1..3),
+  {:selected => @review.personal_training_rating}), :prompt => "Select") %>
+</p>
+<p>
+  <%= r.label :cleanliness_rating %>
+  <%= r.select(:cleanliness_rating, options_for_select((1..3),
+  {:selected => @review.cleanliness_rating}), :prompt => "Select") %>
+</p>
+<p>
+  <%= r.label :description %>
+  <%= r.text_area :description%>
+</p>
+<p>
+  <%= r.hidden_field :gym_id, :value => @review.gym.id %>
+</p>
