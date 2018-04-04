@@ -14,4 +14,17 @@
     <%= f.text_field :email, placeholder: "Please register with your email!" %>
   </p>
 
-  <%end%>
+  <p>
+    <h3>Create an Admin account to post Gyms, non_admins can write reviews.</h3>
+    <%= f.label "Admin?" %>
+    <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select") %>
+  </p>
+  
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+  
+  <h2><%= f.submit %></h2>
+
+<%end%>
