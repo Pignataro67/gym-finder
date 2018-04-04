@@ -1,0 +1,17 @@
+<!--h1>User#new</h1>
+<p>Find me in app/views/user/new.html.erb</p-->
+<h1>Signup</h1>
+<%render partial: '/gyms/render_errors', locals: {model_name: @user} %>
+
+<%= form_for(@user) do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username, placeholder: "Please create a username!" %>
+  </p>
+
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email, placeholder: "Please register with your email!" %>
+  </p>
+
+  <%end%>
