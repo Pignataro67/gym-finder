@@ -1,0 +1,11 @@
+<%= form_for(model_name) do |f| %>
+
+<% if model_name.errors.any? %>
+  <div>
+    <h2>There were some errors, please correct:</h2>
+      <% model_name.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+      <%end%>
+  </div>
+  <%end%>
+<%end%>
