@@ -1,26 +1,42 @@
-<!--h1>Gyms#index</h1>
-<p>Find me in app/views/gyms/index.html.erb</p-->
-  
+<% if logged_in? %>
+  <%= link_to 'Logout', logout_path %>
+  <h2>Hello <%= current_user.user_name %></h2>
+  <%= link_to "Your Profile", user_path(current_user) %>
+
+  <% if is_admin? %>
+    <%= link_to "Add Gym", new_user_gym_path(current_user) %>
+  <%end%>
+
+    <%else%>
+      <%= link_to 'Login', login_path %><br>
+      <%= link_to('Log in with Github!', '/auth/github') %><br>
+      <%= link_to 'Signup', signup_path %><br>
+    <%end%>
+    <br> 
+
   <% if flash[:message] %>
   <h2><%= flash[:message] %></h2>
 <%end%>
 
 <div class="gym_list">
-  <h2>Best Gym Classes</h2>
-  <% Gym.best_classes.each do |gym| %>
+  <h2>Best Gym Classes</h2>  <!--Class = spin, group exercise, etc -->
+  <% Gym.best_gym_classes.each do |gym| %>
   <h3><%= link_to gym.name, gym_path(gym) %></h3>
   <%end%>
 </div>
+<br>
 
 <div class="gym_list">
-  <h2>Best Gym PT</h2>
-  <% Gym.best_pt.each do |gym| %>
+  <h2>Best Gym PT</h2> <!--PT = Personal Training-->
+  <% Gym.best_gym_pts.each do |gym| %>
   <h3><%= link_to gym.name, gym_path(gym) %></h3>
   <%end%>
 </div>
+<br>
+
 
 <div>
-  <% if @gym != nil %>
+  <% if @gyms != nil %>
     <% @gyms.each do |gym| %>
       <%= render partial: "gym", locals: {gym: gym} %>
     <%end%>
