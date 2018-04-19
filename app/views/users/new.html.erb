@@ -1,12 +1,10 @@
-<!--h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p-->
 <h1>Signup</h1>
-<%render partial: '/gyms/render_errors', locals: {model_name: @user} %>
+<%= render partial: '/gyms/render_errors', locals: {model_name: @user} %>
 
 <%= form_for(@user) do |f| %>
   <p>
-    <%= f.label :username %>
-    <%= f.text_field :username, placeholder: "Please create a username!" %>
+    <%= f.label :user_name %>
+    <%= f.text_field :user_name, placeholder: "Please create a username!" %>
   </p>
 
   <p>
@@ -15,7 +13,7 @@
   </p>
 
   <p>
-    <h3>Create an Admin account to post Gyms, non_admins can write reviews.</h3>
+    <h3>Create an Admin account to post Gyms, non admins can write reviews.</h3>
     <%= f.label "Admin?" %>
     <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select") %>
   </p>
