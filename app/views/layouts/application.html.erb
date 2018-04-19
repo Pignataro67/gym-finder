@@ -5,10 +5,13 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %-->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= link_to "Home", root_path %>
+    <h1 class="logo">GymFinder</h1>
     <%= yield %>
   </body>
 </html>
