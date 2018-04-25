@@ -30,7 +30,7 @@ class GymsController < ApplicationController
         @gym.save
       end
     else
-      flash[:message] = "Sorry you need an admin account to add a Gym"
+      flash[:message] = "We're sorry you need an admin account to add a Gym."
     end
       redirect_to root_path
   end
@@ -47,7 +47,7 @@ class GymsController < ApplicationController
       if @gym.update(gym_params)
         redirect_to gym_path(@gym)
       else
-        render :new
+        render :new  
       end
     end
   end
@@ -62,7 +62,7 @@ class GymsController < ApplicationController
   private
 
   def gym_params
-    params.require(:gym).permit(:name, :location, :classes, :review_attributes => [:class_rating, :personal_training_rating, :cleanliness_rating, :description, :date, :user_id, :gym_id])
+    params.require(:gym).permit(:name, :location, :classes, :reviews_attributes => [:class_rating, :personal_training_rating, :cleanliness_rating, :description, :date, :user_id, :gym_id])
   end
 
   def set_gym
