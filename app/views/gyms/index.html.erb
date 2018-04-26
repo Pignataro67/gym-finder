@@ -19,7 +19,7 @@
 <%end%>
 
 <div class="gym_list">
-  <h2>Best Gym Classes</h2>  <!--Class = spin, group exercise, etc -->
+  <h2>Best Gym Classes</h2>  <!--Class = dumbell, kettlebell, spin, group exercise, etc -->
   <% Gym.best_gym_classes.each do |gym| %>
   <h3><%= link_to gym.name, gym_path(gym) %></h3><br>
   <%end%>
