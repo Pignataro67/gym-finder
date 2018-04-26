@@ -1,6 +1,6 @@
 <div class="gym_list">
-  <h2><span class="add_color">Name:</span> <%= link_to gym.name, 
-    gym_path(gym) %></h2>
+  <h2><span class="add_color">Name:</span> <%= link_to gym.name, gym_path(gym) %></h2><br>
+
   <h3><span class="add_color">Class:</span> <%= gym.class %></h3>
   <h3><span class="add_color">Location:</span> <%= gym.location %></h3>
     
@@ -17,7 +17,7 @@
       <%end%>
 
       <% gym.reviews.each do |review| %>
-        <h3><%= review.user.username if review.user %></h3>
+        <h3><%= review.user.user_name if review.user %></h3>
       <%= render partial: '/reviews/review', locals: {review: review} %>
       <% if logged_in? && valid_user?(review) %>
       <%= link_to "Edit", edit_review_path(review) %>
