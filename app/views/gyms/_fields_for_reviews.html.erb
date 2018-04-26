@@ -1,22 +1,22 @@
-<p>
-  <%= r.label :class_rating %>
+<div class="form-group">
+  <%= r.label :class_rating %><br>
   <%= r.select(:class_rating, options_for_select((1..3), 
   {:selected => @review.class_rating}), :prompt => "Select") %>
-</p>
-<p>
-  <%= r.label :personal_training_rating %>
+</div>
+<div class="form-group">
+  <%= r.label :personal_training_rating %><br>
   <%= r.select(:personal_training_rating, options_for_select((1..3),
   {:selected => @review.personal_training_rating}), :prompt => "Select") %>
-</p>
-<p>
-  <%= r.label :cleanliness_rating %>
+</div>
+<div class="form-group">
+  <%= r.label :cleanliness_rating %><br>
   <%= r.select(:cleanliness_rating, options_for_select((1..3),
   {:selected => @review.cleanliness_rating}), :prompt => "Select") %>
-</p>
-<p>
-  <%= r.label :description %>
-  <%= r.text_area :description%>
-</p>
-<p>
+</div>
+<div class="form-group">
+  <%= r.label :description %><br>
+  <%= r.text_area :description, size: "15x4" %>
+</div>
+<div class="form-group">
   <%= r.hidden_field :gym_id, :value => @review.gym.id %>
-</p>
+</div>
