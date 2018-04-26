@@ -1,10 +1,8 @@
-<!--h1>Gyms#new</h1>
-<p>Find me in app/views/gyms/new.html.erb</p-->
 <%= render partial: 'render_errors', locals: {model_name: @gym} %>
   <% if is_admin? %>
 
   <%= form_for(@gym) do |f| %>
-<%= render parital: "form", locals: {f: f} %>
+<%= render partial: "form", locals: {f: f} %>
 
   <h3>
     <%f.fields_for :reviews, @review do |review_builder| %>
@@ -15,4 +13,4 @@
     <%= f.submit %>
   </h3>
   <%end%>
-  <%end%>
+<%end%>
