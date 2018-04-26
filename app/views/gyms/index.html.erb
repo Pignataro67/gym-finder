@@ -21,7 +21,7 @@
 <div class="gym_list">
   <h2>Best Gym Classes</h2>  <!--Class = spin, group exercise, etc -->
   <% Gym.best_gym_classes.each do |gym| %>
-  <h3><%= link_to gym.name, gym_path(gym) %></h3>
+  <h3><%= link_to gym.name, gym_path(gym) %></h3><br>
   <%end%>
 </div>
 <br>
@@ -29,7 +29,7 @@
 <div class="gym_list">
   <h2>Best Gym PT</h2> <!--PT = Personal Training-->
   <% Gym.best_gym_pts.each do |gym| %>
-  <h3><%= link_to gym.name, gym_path(gym) %></h3>
+  <h3><%= link_to gym.name, gym_path(gym) %></h3><br>
   <%end%>
 </div>
 <br>
