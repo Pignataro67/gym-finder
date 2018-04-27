@@ -13,10 +13,10 @@
     <%= f.text_field :email, placeholder: "Please register with your email!", class: "form-control" %>
   </div>
 
-  <div class="form-group">
+  <div> <!--class="form-group"-->
     <h3>Create an Admin account to post Gyms, non admins can write reviews.</h3>
     <%= f.label "Admin?" %><br>
-    <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select"), class: "form-control" %>
+    <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select") %> <!-- class: "form-control" %-->
   </div>
   
   <div>
