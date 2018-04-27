@@ -1,4 +1,4 @@
-class Gym < ApplicationRecord
+class Gym < ApplicationRecord  
   has_many :reviews
   has_many :users, through: :reviews
 
@@ -22,7 +22,7 @@ class Gym < ApplicationRecord
   def self.best_gym_pts
     self.all.select do |gym|
       gym if gym.reviews.any?{ |review| 
-        review.pt_rating >= 2}
+        review.personal_training_rating >= 2}
     end
   end
 end
