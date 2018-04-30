@@ -7,12 +7,10 @@ class ReviewsController < ApplicationController
 
   def create
     if !is_admin?
-
       @review = Review.new(review_params)
       @review.date = Date.today
       @review.user_id = current_user.id
       @review.save
-
       redirect_to root_path
     end
   end
