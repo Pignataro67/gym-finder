@@ -4,7 +4,7 @@ class GymsController < ApplicationController
   before_action :authentication_required, only: [:new, :show, :create, :destroy, :update, :edit]
 
   include GymHelper
-
+  
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
