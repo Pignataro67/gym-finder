@@ -12,7 +12,7 @@ class Gym < ApplicationRecord
     end
   end
 
-  def self.best_gym_classes
+  def self.best_gym_classes 
     self.all.select do |gym|
       gym.name if gym.reviews.any?{ |review|
         review.class_rating == 3}
@@ -22,7 +22,7 @@ class Gym < ApplicationRecord
   def self.best_gym_pts
     self.all.select do |gym|
       gym if gym.reviews.any?{ |review| 
-        review.personal_training_rating >= 2}
+        review.personal_training_rating == 3}
     end
   end
 end
