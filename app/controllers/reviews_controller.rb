@@ -5,6 +5,10 @@ class ReviewsController < ApplicationController
   
   include ReviewHelper
 
+  def recent_reviews
+    @recent_reviews = Review.recent_reviews
+  end
+
   def create
     if !is_admin?
       @review = Review.new(review_params)
@@ -16,6 +20,11 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
+    @review = Review.find(params[:id])
+    @gym = @review.gym
   end
 
   def update
