@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :gyms, only: [:show, :create, :edit, :update, :destroy]
 
+  get 'reviews/recent_reviews', to: 'reviews#recent_reviews'
+
   resources :reviews
 
   get 'signup' => 'users#new', as: :signup
