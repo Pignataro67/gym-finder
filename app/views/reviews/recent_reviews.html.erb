@@ -1,0 +1,13 @@
+<h1>Recent Reviews</h1>
+
+<% @recent_reviews.each do |review| %>
+
+<h3>Gym: <%=link_to review.gym.name, gym_path(review.gym) %></h3>
+  <h3>Description: <%= review.description %><h3>
+  <h3>Class Rating: <%=review.class_rating %></h3>
+  <h3>Personal Traing Rating: <%= review.personal_training_rating %></h3>
+  <h3>Cleanliness Rating: <%= review.cleanliness_rating %></h3>
+  <h3>Created: <%= review.created_at %></h3>
+  <h3>Created By: <%= link_to review.user.user_name, user_path(review.user) %></h3>
+  <br>
+<%end%> 
