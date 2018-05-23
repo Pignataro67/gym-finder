@@ -10,7 +10,8 @@
   </head>
 
   <body>
-    <%= link_to "Home", root_path %>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Recent Reviews", reviews_recent_reviews_path %></li>
     <h1 class="logo">GymFinder</h1>
     <%= yield %>
   </body>
