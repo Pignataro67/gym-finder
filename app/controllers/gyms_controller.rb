@@ -41,7 +41,7 @@ class GymsController < ApplicationController
         @gym.save
       end
     else
-      flash[:message] = "We're sorry you need an admin account to add a Gym."
+      flash[:message] = "We're sorry, you need an admin account to add a Gym."
     end
       redirect_to root_path
   end
