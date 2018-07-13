@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<!-- <% if logged_in? %>
   <%= link_to 'Logout', logout_path %>
   <h2>Hello <%= current_user.user_name %></h2>
   <%= link_to "Your Profile", user_path(current_user) %>
@@ -20,7 +20,7 @@
 
 <div class="gym_list">
   <h2>Best Gym Classes</h2>  <!--Class = dumbell, kettlebell, spin, group exercise, etc -->
-  <% Gym.best_gym_classes.each do |gym| %>
+  <!-- <% Gym.best_gym_classes.each do |gym| %>
   <h3><%= link_to gym.name, gym_path(gym) %></h3><br>
   <%end%>
 </div>
@@ -28,7 +28,7 @@
 
 <div class="gym_list">
   <h2>Best Gym PT</h2> <!--PT = Personal Training-->
-  <% Gym.best_gym_pts.each do |gym| %>
+  <!-- <% Gym.best_gym_pts.each do |gym| %>
   <h3><%= link_to gym.name, gym_path(gym) %></h3><br>
   <%end%>
 </div>
@@ -40,4 +40,4 @@
       <%= render partial: "gym", locals: {gym: gym} %>
     <%end%>
   <%end%>
-</div>
+</div> --> --> -->
