@@ -1,22 +1,33 @@
 class GymsController < ApplicationController
 
-  before_action :set_gym, only: [:edit, :show, :destroy, :update]
+  before_action :set_gym, only: [:edit, :show, :destroy, :update, :next]  
   before_action :authentication_required, only: [:new, :show, :create, :destroy, :update, :edit]
 
   include GymHelper
   
   def index
     if params[:user_id]
-      @user = User.find(params[:user_id])
-      @gyms = @user.gyms
+      user = User.find(params[:user_id])
+      @gyms = user.gyms
+      @is_admin = is_admin?.to_s
+      render json: @gyms
     else
       @gyms = Gym.all
+      @is_admin = @is_admin?.to_s
+      respond_to do |f|
+        f.html
+        f.json {render json: @gyms}
+      end
     end 
   end
 
   def new
     @gym = Gym.new
     @review = @gym.reviews.build
+    respond_to do |f|
+      f.json {render json: @review}
+      f.html
+    end
   end
 
   def create
@@ -36,7 +47,11 @@ class GymsController < ApplicationController
   end
 
   def show
-    @review = @gym.reviews.build
+    @review = Review.new
+    respond_to do |f|
+      f.json {render json: @gym}
+      f.html
+    end
   end
 
   def edit
@@ -59,10 +74,19 @@ class GymsController < ApplicationController
     end
   end
 
-  private
+  def next
+    @next_gym = @gym.next
+    render json: @next_gym
+  end
+
+  def recent_reviews
+   @recent_reviews = Review.recent_reviews
+ end
+
+  protected
 
   def gym_params
-    params.require(:gym).permit(:name, :location, :classes, :reviews_attributes => [:class_rating, :personal_training_rating, :cleanliness_rating, :description, :date, :user_id, :gym_id])
+    params.require(:gym).permit(:name, :location, :classes, :reviews_attributes => [:class_rating, :personal_training_rating, :cleanliness_rating, :description, :date, :user_id, :gym_id, :complete_name])
   end
 
   def set_gym
