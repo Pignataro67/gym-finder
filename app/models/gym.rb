@@ -25,4 +25,13 @@ class Gym < ApplicationRecord
         review.personal_training_rating == 3}
     end
   end
+
+  def next
+    gym = Gym.where("id > ?", id).first
+    if gym
+      gym
+    else
+      Gym.first
+    end
+  end
 end
