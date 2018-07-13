@@ -18,5 +18,10 @@
   <%= r.text_area :description, size: "30x10" %>
 </div>
 <div class="form-group">
-  <%= r.hidden_field :gym_id, :value => @review.gym.id %>
+  <%= r.label :completename %>
+  <%= r.text_field :completename, size: "20x5" %>
+</div>
+<div class="form-group">
+  <%= r.hidden_field :user_id, :value => current_user.id %>
+  <%= r.hidden_field :gym_id, :value => @gym.id %>
 </div>
