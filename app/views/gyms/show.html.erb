@@ -2,12 +2,18 @@
 <p><%= flash[:message] %></p>
 <%end%>
 
-<%= render partial: "gym", locals: {gym: @gym} %>
+<div class="gym_div">
+  <h2><%= @gym.name%></h2>
+  <h3>Classes: <%= @gym.classes %></h3>
+  <h3>Location: <%= @gym.location %></h3>
+  <br>
+</div>
 
-<% if !is_admin? %>
+<div id="reviews_div">
+
   <h2>Please Write a Review</h2>
     <%= form_for(@review) do |f| %>
   <%= render partial: "fields_for_reviews", locals: {r: f} %>
-    <%= f.submit value="Submit Review" %>
+    <%= f.submit value="Submit Review", {:id => "submit-review-button", :data => { :'id' => @gym.id }} %>
   <%end%>
-<%end%>
+</div>
