@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show 
+    render json: @user, status: 200
+  end
+
 private
 
   def user_params
