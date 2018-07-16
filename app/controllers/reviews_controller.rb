@@ -11,11 +11,11 @@ class ReviewsController < ApplicationController
 
   def create
     if !is_admin?
-      @review = Review.new(review_params)
+      @gym = Gym.find_by(id: params[:review][:gym_id])
+      @review = @gym.reviews.build(review_params)
       @review.date = Date.today
-      @review.user_id = current_user.id
-      @review.save
-      redirect_to root_path
+      @gym.save
+      render json: @review
     end
   end
 
@@ -28,7 +28,10 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    if valid_user?(@review)
+    if !valid_user?(@review)
+      flash[:message] = "Sorry, You can only edit your review!"
+      render :edit
+    else
       if @review.update(review_params)
         redirect_to root_path
       else
@@ -47,7 +50,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:class_rating, :personal_training_rating, :cleanliness_rating, :description, :gym_id, :user_id, :id)
+    params.require(:review).permit(:class_rating, :personal_training_rating, :cleanliness_rating, :description, :date, :gym_id, :user_id, :id, :complete_name)
   end
 
   def set_review
