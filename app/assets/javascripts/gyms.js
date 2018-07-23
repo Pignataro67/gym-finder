@@ -10,6 +10,8 @@ const bindClickHandlers = () => {
       $("#app-container").html('')
       gyms.forEach( function (gym) {
         let newGym = new Gym(gym)
+        let gymHtml = newGym.formatIndex(admin)
+        $("#app-container").append(gymHtml)
       })
     })
   })
@@ -22,4 +24,11 @@ function Gym(gym) {
   this.classes = gym.classes
   this.reviews = gym.reviews
   this.users = gym.users
+}
+
+Gym.prototype.formatIndex = function(admin) {
+  let gymHtml = `
+  <div class="gym_div">
+  <h2>${this.name}</h2>
+  `
 }
