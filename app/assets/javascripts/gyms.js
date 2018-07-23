@@ -30,5 +30,8 @@ Gym.prototype.formatIndex = function(admin) {
   let gymHtml = `
   <div class="gym_div">
   <h2>${this.name}</h2>
+  <h4><b>Location:</b> ${this.location} </h4>
+  <h4><b>Classes:</b> ${this.classes} </h4>
   `
+  return gymHtml
 }
