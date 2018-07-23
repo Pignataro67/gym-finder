@@ -6,6 +6,7 @@ const bindClickHandlers = () => {
   let admin = $('#admin').text();
   $('#list_gyms').on('click', function(e) {
     e.preventDefault();
+    history.pushState(null, null, "/gyms")
     $.get('/gyms.json').done((gyms) => {
       $("#app-container").html('')
       gyms.forEach( function (gym) {
