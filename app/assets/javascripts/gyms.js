@@ -29,6 +29,17 @@ const bindClickHandlers = () => {
       $("#app-container").append(newGymFormat)
     })
   })
+
+  $(document).on("click", '.next_gym', function() {
+    let isAdmin = $('#admin').text();
+    $('#app-container').html("")
+    let id = this.dataset.id
+    $.get(`/gyms/${id}/next`).done(gym => {
+    let buildGym = new Gym(gym)
+    let gymHtml = buildGym.formatShow(isAdmin)
+    $("#app-container").append(gymHtml)
+    })
+  })
 }
 
 function Gym(gym) {
@@ -63,6 +74,7 @@ Gym.prototype.formatShow = function(admin) {
   <h4><b>Classes:</b> ${this.classes} </h4>
   <h4><b>Owner:</b> ${this.users[0].user_name}</h4>
   <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  <button class="next_gym" data-id="${this.id}">Next</button>
   </div>
   `
 
