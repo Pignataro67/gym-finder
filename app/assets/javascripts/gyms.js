@@ -41,6 +41,10 @@ Gym.prototype.formatIndex = function(admin) {
   <h2>${this.name}</h2>
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
+  <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  ${admin === 'true' ? `<a href="/gyms/${this.id}/edit">Edit Gym</a>` : ''}
+  ${admin === 'true' ? `<a href="/gyms/${this.id}" data-method="delete">Delete Gym</a>` : ''}
+  </div>
   `
 
   return gymHtml
@@ -52,6 +56,9 @@ Gym.prototype.formatShow = function(admin) {
   <h2>${this.name}</h2>
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
+  <h4><b>Owner:</b> ${this.users[0].user_name}</h4>
+  <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  </div>
   `
 
   return gymHtml
