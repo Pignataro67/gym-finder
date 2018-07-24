@@ -16,7 +16,15 @@ const bindClickHandlers = () => {
       })
     })
   })
+
+  $(document).on("click", ".show-link", function(e) {
+    e.preventDefault()
+    let id = e.currentTarget.dataset.id;
+
+  })
 }
+
+
 
 function Gym(gym) {
   this.id = gym.id
@@ -34,5 +42,17 @@ Gym.prototype.formatIndex = function(admin) {
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
   `
+
+  return gymHtml
+}
+
+Gym.prototype.formatShow = function(admin) {
+  let gymHtml = `
+  <div class="gym_div">
+  <h2>${this.name}</h2>
+  <h4><b>Location:</b> ${this.location} </h4>
+  <h4><b>Classes:</b> ${this.classes} </h4>
+  `
+
   return gymHtml
 }
