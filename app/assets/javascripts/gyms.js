@@ -21,10 +21,15 @@ const bindClickHandlers = () => {
     e.preventDefault()
     let id = e.currentTarget.dataset.id;
     history.pushState(null, null, `/gyms/${id}`)
+
+    $.get(`/gyms/${id}.json`).done((gym) => {
+      $("#app-container").html('')
+      let newGym = new Gym(gym)
+      let newGymFormat = newGym.formatShow(admin)
+      $("#app-container").append(newGymFormat)
+    })
   })
 }
-
-
 
 function Gym(gym) {
   this.id = gym.id
