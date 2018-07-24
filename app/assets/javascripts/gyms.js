@@ -20,7 +20,7 @@ const bindClickHandlers = () => {
   $(document).on("click", ".show-link", function(e) {
     e.preventDefault()
     let id = e.currentTarget.dataset.id;
-
+    history.pushState(null, null, `/gyms/${id}`)
   })
 }
 
