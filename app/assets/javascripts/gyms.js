@@ -92,6 +92,22 @@ function Review(review) {
   this.complete_name = review.complete_name
 }
 
+Review.prototype.formatReview = function() {
+  let newReview = `
+  <div id="reviews_div">
+  <h3>Reviews</h3>
+  <h4><b>Class Rating: ${this.class_rating}</b></h4>
+  <h4><b>Personal Training Rating: ${this.personal_training_rating}</b></h4>
+  <h4><b>Cleanliness Rating: ${this.cleanliness_rating}</b></h4>
+  <h4><b>Description: ${this.description}</b></h4>
+  <h4><b>Reviewer: ${this.complete_name}</b></h4>
+  </div>
+  `
+
+  return newReview
+  
+}
+
 const userClickHandlers = () => {
   $("#user-profile").on("click", function (e) {
     e.preventDefault();
