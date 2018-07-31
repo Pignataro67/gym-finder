@@ -80,3 +80,21 @@ Gym.prototype.formatShow = function(admin) {
 
   return gymHtml
 }
+
+const userClickHandlers = () => {
+  $("#user-profile").on("click", function (e) {
+    e.preventDefault();
+    $("#app-container").html("")
+    $.get(this.href).done(user => {
+    history.pushState(null, null, `/users/${user.id}`)
+    $("#app-container").html("")
+    $.get(`/users/${user.id}/gyms.json`).done(res => {
+      res.forEach( function (gym) {
+        var createGym =  new Gym(gym)
+        var formatRes = createGym.formatGym()
+        $("#app-container").append(formatRes)
+      })
+    })  
+    })
+  })
+}
