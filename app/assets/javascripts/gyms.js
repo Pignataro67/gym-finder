@@ -1,5 +1,6 @@
 $(() => {
   bindClickHandlers()
+  userClickHandlers() 
 });
 
 const bindClickHandlers = () => {
@@ -81,6 +82,16 @@ Gym.prototype.formatShow = function(admin) {
   return gymHtml
 }
 
+function Review(review) {
+  this.id = review.id
+  this.class_rating = review.class_rating
+  this. personal_training_rating = review.personal_training_rating
+  this.cleanliness_rating = review.cleanliness_rating
+  this.description = review.description
+  this.user = review.user_name
+  this.complete_name = review.complete_name
+}
+
 const userClickHandlers = () => {
   $("#user-profile").on("click", function (e) {
     e.preventDefault();
@@ -90,11 +101,11 @@ const userClickHandlers = () => {
     $("#app-container").html("")
     $.get(`/users/${user.id}/gyms.json`).done(res => {
       res.forEach( function (gym) {
-        var createGym =  new Gym(gym)
+        var createGym = new Gym(gym)
         var formatRes = createGym.formatGym()
         $("#app-container").append(formatRes)
-      })
-    })  
+        })
+      })  
     })
   })
 }
