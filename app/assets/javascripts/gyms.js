@@ -41,6 +41,28 @@ const bindClickHandlers = () => {
     $("#app-container").append(gymHtml)
     })
   })
+
+  $("#new_review").on("submit", function(e) {
+    e.preventDefault();
+    $.ajax({
+      method: "post",
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(review) {
+
+        let formSelectBoxes = $("#new_review select")
+
+        $.each(formSelectBoxes, function(i, box) {
+          box.value = ""
+        })
+        $("#new_review #review_description").val("")
+        $("#new_review #review_complete_name").val("")
+
+        var newReview = new Review(review);
+        $("#app-container").append(newReview.formatReview())//maybe not now
+      }
+    })
+  })
 }
 
 function Gym(gym) {
@@ -82,6 +104,17 @@ Gym.prototype.formatShow = function(admin) {
   return gymHtml
 }
 
+Gym.prototype.writeReview = function(admin) {
+  let review = this.reviews[this.reviews.length - 1]
+
+  if (review) {
+    let reviewHtml = `
+    <div id="reviews_div">
+    <h3>Reviews</h3>
+    `
+  }
+}
+
 function Review(review) {
   this.id = review.id
   this.class_rating = review.class_rating
@@ -105,7 +138,7 @@ Review.prototype.formatReview = function() {
   `
 
   return newReview
-  
+
 }
 
 const userClickHandlers = () => {
