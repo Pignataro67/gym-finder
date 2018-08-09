@@ -111,6 +111,11 @@ Gym.prototype.writeReview = function(admin) {
     let reviewHtml = `
     <div id="reviews_div">
     <h3>Reviews</h3>
+    <h4><b>Class Rating: ${review.class_rating}</b></h4>
+    <h4><b>Personal Training Rating: ${review.personal_training_rating}</b></h4>
+    <h4><b>Cleanliness Rating: ${review.cleanliness_rating}</b></h4>
+    <h4><b>Description: ${review.description}</b></h4>
+    <h4><b>Reviewerer: ${review.complete_name}</b></h4>
     `
   }
 }
