@@ -116,8 +116,46 @@ Gym.prototype.writeReview = function(admin) {
     <h4><b>Cleanliness Rating: ${review.cleanliness_rating}</b></h4>
     <h4><b>Description: ${review.description}</b></h4>
     <h4><b>Reviewerer: ${review.complete_name}</b></h4>
+    ${admin === 'true' ? '' : `<a href="/reviews/${review.id}/edit">Edit Review</a>`}
+    <br>
+    </div>
     `
+
+    return reviewHtml
   }
+}
+
+Gym.prototype.formatReviews = function () {
+  let reviews = this.reviews
+  let reviewsFolder = ''
+
+  reviews.forEach((review) => {
+    let reviewFile = `
+    <div id="reviews_div">
+    <h3>Reviews</h3>
+    <h4><b>Class Rating: ${review.class_rating}</b></h4>
+    <h4><b>Personal Training Rating: ${review.personal_training_rating}</b></h4>
+    <h4><b>Cleanliness Rating: ${review.cleanliness_rating}</b></h4>
+    <h4><b>Description: ${review.description}</b></h4>
+    <h4><b>Reviewerer: ${review.complete_name}</b></h4>
+    </div>
+    `
+
+    return reviewsFolder += reviewFile
+  })
+
+  return reviewsFolder
+}
+
+function findReviewOwner(gym) {
+  var reviewOwner = ""
+  gym.users.forEach(user => {
+    if(user.admin === true) {
+      reviewOwner = user.user_name
+    }
+  })
+
+  return reviewOwner
 }
 
 function Review(review) {
