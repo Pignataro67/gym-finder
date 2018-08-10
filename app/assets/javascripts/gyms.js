@@ -14,6 +14,8 @@ const bindClickHandlers = () => {
         let newGym = new Gym(gym)
         let gymHtml = newGym.formatIndex(admin)
         $("#app-container").append(gymHtml)
+
+        
       })
     })
   })
@@ -145,6 +147,17 @@ Gym.prototype.formatReviews = function () {
   })
 
   return reviewsFolder
+}
+
+function findReviewOwner(gym) {
+  var reviewOwner = ""
+  gym.users.forEach(user => {
+    if(user.admin === true) {
+      reviewOwner = user.user_name
+    }
+  })
+
+  return reviewOwner
 }
 
 function Review(review) {
