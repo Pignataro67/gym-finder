@@ -15,7 +15,7 @@ const bindClickHandlers = () => {
         let gymHtml = newGym.formatIndex(admin)
         $("#app-container").append(gymHtml)
 
-        
+
       })
     })
   })
@@ -30,6 +30,7 @@ const bindClickHandlers = () => {
       let newGym = new Gym(gym)
       let newGymFormat = newGym.formatShow(admin)
       $("#app-container").append(newGymFormat)
+      $("#app-container").append(newGym.formatReviews())
     })
   })
 
@@ -41,6 +42,7 @@ const bindClickHandlers = () => {
     let buildGym = new Gym(gym)
     let gymHtml = buildGym.formatShow(isAdmin)
     $("#app-container").append(gymHtml)
+    $("#app-container").append(buildGym.formatReviews()) //add
     })
   })
 
@@ -61,7 +63,7 @@ const bindClickHandlers = () => {
         $("#new_review #review_complete_name").val("")
 
         var newReview = new Review(review);
-        $("#app-container").append(newReview.formatReview())//maybe not now
+        $("#app-container").append(newReview.formatReview()) //add
       }
     })
   })
@@ -83,6 +85,7 @@ Gym.prototype.formatIndex = function(admin) {
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
   <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`} //add
   ${admin === 'true' ? `<a href="/gyms/${this.id}/edit">Edit Gym</a>` : ''}
   ${admin === 'true' ? `<a href="/gyms/${this.id}" data-method="delete">Delete Gym</a>` : ''}
   </div>
@@ -99,6 +102,7 @@ Gym.prototype.formatShow = function(admin) {
   <h4><b>Classes:</b> ${this.classes} </h4>
   <h4><b>Owner:</b> ${this.users[0].user_name}</h4>
   <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`} //add
   <button class="next_gym" data-id="${this.id}">Next</button>
   </div>
   `
@@ -166,7 +170,7 @@ function Review(review) {
   this. personal_training_rating = review.personal_training_rating
   this.cleanliness_rating = review.cleanliness_rating
   this.description = review.description
-  this.user = review.user_name
+  this.user = review.user.user_name
   this.complete_name = review.complete_name
 }
 
@@ -198,6 +202,8 @@ const userClickHandlers = () => {
         var createGym = new Gym(gym)
         var formatRes = createGym.formatGym()
         $("#app-container").append(formatRes)
+ 
+
         })
       })  
     })
