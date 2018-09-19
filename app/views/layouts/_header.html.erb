@@ -5,6 +5,15 @@
 
       <ul class="nav nav-pills">
         <li><%= link_to "Home", root_path, {:id=>"home-button"} %></li> 
+
+        <% if logged_in %>
+        <p class="navbar-text navbar-right">Ciao <%= current_user.user_name %>! </p>
+        <li><%= link_to "Log-out", logout_path%></li>
+        <li><%= link_to "Your Profile", user_path(current_user), {:id => "user-profile"}%></li>
+        <li><a id="list_gyms">Gyms</a></li>
+        <% if is_admin? %>
+        <li><%= link_to "Add Gym", new_user_gym_path(current_user)%></li>
+        <%end%>
       </ul>
       </div>
     </nav>
