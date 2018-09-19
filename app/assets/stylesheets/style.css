@@ -33,3 +33,26 @@
     margin-bottom: 20px;
     border-radius: 20px 50px;
   }
+
+  .gym_div h2, #reviews_div h3, .owner_div h3 {
+    font-weight: bold;
+    color: #3fb0ac;
+  }
+
+  .gym_div h4 {
+    color: #3fb0ac;
+  }
+
+  .owner_div {
+    background-color: #3fb0ac;
+    padding: 5px 0px 5px 20px;
+  }
+
+  #reviews_div {
+    background-color: #b3c1c2;
+    padding: 20px 20px 20px 50px;
+    margin-bottom: 25px;
+    box-shadow: 4px 7px #e6e6e8;
+    border-radius: 20px 50px 30px 10px;
+  }
+
