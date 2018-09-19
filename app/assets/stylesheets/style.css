@@ -56,3 +56,16 @@
     border-radius: 20px 50px 30px 10px;
   }
 
+  #reviews_div h3 {
+    color: #f1f2e8;
+  }
+
+  nav {
+    padding: 10px 25px 10px 10px;
+    font-size: 1.3em;
+  }
+
+  nav li {
+    color: blue;
+  }
+
