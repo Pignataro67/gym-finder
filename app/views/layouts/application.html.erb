@@ -17,9 +17,17 @@
       <%= render 'layouts/header' %>
       <div class="container">
       <div id="admin" style="display:none;"><%= is_admin?.to_s %></div>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "Recent Reviews", reviews_recent_reviews_path %></li>
-    <h1 class="logo">GymFinder</h1>
-    <%= yield %>
+
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8" id="gym-container">
+        <%yield%>
+      </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   </body>
 </html>
