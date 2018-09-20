@@ -4,12 +4,19 @@
     <title>GymFinder</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <!--%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %-->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0
+    /css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTN
+    h0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+    <div class="container-fluid">
+      <%= render 'layouts/header' %>
+      <div class="container">
+      <div id="admin" style="display:none;"><%= is_admin?.to_s %></div>
     <li><%= link_to "Home", root_path %></li>
     <li><%= link_to "Recent Reviews", reviews_recent_reviews_path %></li>
     <h1 class="logo">GymFinder</h1>
