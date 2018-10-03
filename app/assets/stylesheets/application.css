@@ -12,54 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ *= require style
  */
-
- @import url('https://fonts.googleapis.com/css?family=Inconsolata&effect=fire-animation');
-
-  body {
-    background-color: rgb(179, 255, 0);
-    font-family: 'Inconsolata', sans;
-    font-weight: 300;
-  }
-
-  .field_with_errors {
-    border: 1px red solid;
-  }
-
-  .logo {
-    text-align: center;
-    font-size: 1.6em;
-    color: rgb(122, 58, 42);
-  }
-
-  .add_color {
-    color: rgb(42, 122, 42);
-    font-size: 1em;
-  }
-
-  .gym_list {
-    background-color: rgb(255, 255, 255);
-    padding: 20px;
-    width: 50%;
-    margin-left: 25%;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    font-size: 1.2em;
-    color: rgb(45, 122, 42);
-  }
-
-  h3 {
-    color: rgb(100, 110, 253);
-    font-size: 1.0em;
-  }
-
-  a {
-    color: rgb(253, 100, 146);
-    font-size: 1.0em;
-  }
-
-  h4 {
-    font-size: 1.0em;
-  }
+ 
