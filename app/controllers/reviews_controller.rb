@@ -22,11 +22,6 @@ class ReviewsController < ApplicationController
   def edit
   end
 
-  def show
-    @review = Review.find(params[:id])
-    @gym = @review.gym
-  end
-
   def update
     if !valid_user?(@review)
       flash[:message] = "Sorry, You can only edit your review!"
