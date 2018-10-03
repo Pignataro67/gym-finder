@@ -6,7 +6,7 @@
       <ul class="nav nav-pills">
         <li><%= link_to "Home", root_path, {:id=>"home-button"} %></li> 
 
-        <% if logged_in %>
+        <% if logged_in? %>
           <p class="navbar-text navbar-right">Ciao <%= current_user.user_name %>! </p>
           <li><%= link_to "Log-out", logout_path%></li>
           <li><%= link_to "Your Profile", user_path(current_user), {:id => "user-profile"}%></li>
