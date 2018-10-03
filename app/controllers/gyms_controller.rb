@@ -3,7 +3,7 @@ class GymsController < ApplicationController
   before_action :set_gym, only: [:edit, :show, :destroy, :update, :next]  
   before_action :authentication_required, only: [:new, :show, :create, :destroy, :update, :edit]
 
-  include GymHelper
+  include GymsHelper
   
   def index
     if params[:user_id]
@@ -13,7 +13,7 @@ class GymsController < ApplicationController
       render json: @gyms
     else
       @gyms = Gym.all
-      @is_admin = @is_admin?.to_s
+      @is_admin = is_admin?.to_s
       respond_to do |f|
         f.html
         f.json {render json: @gyms}
