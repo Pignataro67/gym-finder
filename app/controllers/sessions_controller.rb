@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       end
       @user.save
       session[:user_id] = @user.id
-      render 'gyms/index'
+      render json: @gyms
     else
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
