@@ -29,9 +29,9 @@
 
   .gym_div {
     background-color: #d6dfd4;
-    padding: 20px 20px 20px 40px;
+    padding: 20px, 20px, 20px, 40px;
     margin-bottom: 20px;
-    border-radius: 20px 50px;
+    border-radius: 20px, 50px;
   }
 
   .gym_div h2, #reviews_div h3, .owner_div h3 {
@@ -45,15 +45,15 @@
 
   .owner_div {
     background-color: #3fb0ac;
-    padding: 5px 0px 5px 20px;
+    padding: 5px, 0px, 5px, 20px;
   }
 
   #reviews_div {
     background-color: #b3c1c2;
-    padding: 20px 20px 20px 50px;
+    padding: 20px, 20px, 20px, 50px;
     margin-bottom: 25px;
     box-shadow: 4px 7px #e6e6e8;
-    border-radius: 20px 50px 30px 10px;
+    border-radius: 20px, 50px, 30px, 10px;
   }
 
   #reviews_div h3 {
@@ -61,7 +61,7 @@
   }
 
   nav {
-    padding: 10px 25px 10px 10px;
+    padding: 10px, 25px, 10px, 10px;
     font-size: 1.3em;
   }
 
