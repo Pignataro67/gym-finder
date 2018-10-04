@@ -1,0 +1,18 @@
+<h1>Hello <%= current_user.user_name.capitalize %></h1>
+
+  <% if is_admin? %>
+    <%= link_to "Your Gyms", user_gyms_path(current_user) %>
+  <%end%>
+
+  <% if !is_admin? %>
+
+    <h2>Your Reviews</h2>
+    <% @user.reviews.each do |review| %>
+
+    <h3 style="color: #EF7554">
+    <%= review.user.user_name %></h3>
+    <h2>Gym Name: <%= review.gym.name %></h2>
+
+<%= render partial: '/reviews/review', locals: {review: review} %>
+  <%end%>
+<%end%>
