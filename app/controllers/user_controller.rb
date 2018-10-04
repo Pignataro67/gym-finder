@@ -14,18 +14,20 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       render :new
+    end
   end
-end
+
+  def show 
+    render json: @user, status: 200
+  end
 
 private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:user_name, :email, :password)
   end
 
   def set_user
     @user = User.find_by(id: params[:id])
   end
 end
-
-
