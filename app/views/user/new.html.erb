@@ -1,29 +1,38 @@
-<!--h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p-->
-<h1>Signup</h1>
-<%render partial: '/gyms/render_errors', locals: {model_name: @user} %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 sign-in-portal">
+
+<h2>Signup</h2>
+<%= render partial: '/gyms/render_errors', locals: {model_name: @user} %>
 
 <%= form_for(@user) do |f| %>
-  <p>
-    <%= f.label :username %>
-    <%= f.text_field :username, placeholder: "Please create a username!" %>
-  </p>
 
-  <p>
-    <%= f.label :email %>
-    <%= f.text_field :email, placeholder: "Please register with your email" %>
-  </p>
+  <div class="form-group">
+    <%= f.label :user_name %><br>
+    <%= f.text_field :user_name, placeholder: "Please create a username!", class: "form-control" %>
+  </div>
+    
+  <div class="form-group">
+    <%= f.label :email %><br> 
+    <%= f.text_field :email, placeholder: "Please register with your email!", class: "form-control" %>
+  </div>
 
-  <p>
-    <h3>Create an Admin account to post your Gyms.</h3>
-    <%= f.label "Admin?" %>
-    <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select") %>
-  </p>
+  <div> <!--class="form-group"-->
+    <h3>Create an Admin account to post Gyms, non admins can write reviews.</h3>
+    <%= f.label "Admin?" %><br>
+    <%= f.select(:admin, options_for_select([['Yes', true], ['No', false]], {:selected => @user.admin}), :prompt => "Select") %> <!-- class: "form-control" %-->
+  </div>
+  
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %><br>
+  </div>
+  
+  <h4><%= f.submit %></h4>
 
-  <p>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </p>
-
-  <h2><%= f.submit %></h2>
-  <%end%>
+<%end%>
+        </div>
+      <div class="col-lg-4"></div>   
+    </div>
+  </div>
