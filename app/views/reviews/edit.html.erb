@@ -1,10 +1,4 @@
-<!-- <%= form_for(@review) do |f| %>
-  <h1>Write a Review</h1>
-<%= render partial: "gyms/fields_for_reviews", locals: {r: f} %>
-  <p><%= f.submit %></p>
-<%end%> -->
-
-<% if flash [:message] != nil %>
+<% if flash[:message] != nil %>
 <%= flash[:message] %>
 <%end%>
 
@@ -34,8 +28,8 @@
 </p>
 
 <p>
-  <%= f.label :completename %>
-  <%= f.text_field :completename %>
+  <%= f.label :complete_name %>
+  <%= f.text_field :complete_name %>
 </p>
 
 <%= f.hidden_field :user_id, :value => current_user.id %>
