@@ -1,6 +1,6 @@
 class GymsController < ApplicationController
 
-  before_action :set_gym, only: [:edit, :show, :destroy, :update, :next]  
+  before_action :set_gym, only: [:edit, :show, :destroy, :update, :next, :previous]  
   before_action :authentication_required, only: [:new, :show, :create, :destroy, :update, :edit]
 
   include GymsHelper
@@ -77,6 +77,16 @@ class GymsController < ApplicationController
   def next
     @next_gym = @gym.next
     render json: @next_gym
+  end
+
+  def previous
+    @previous_gym = @gym.previous
+    render json: @previous_gym
+  end
+
+  def all
+    @all_gym = @gym.all
+    render json: @all_gym
   end
 
   def recent_reviews

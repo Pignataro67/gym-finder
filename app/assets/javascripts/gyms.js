@@ -1,59 +1,108 @@
-$(() => {
+$(document).ready(function() {
   bindClickHandlers()
   userClickHandlers() 
 });
 
 const bindClickHandlers = () => {
   let admin = $('#admin').text();
-  $('#list_gyms').on('click', function(e) {
-    e.preventDefault();
+  $('#list_gyms').on('click', function(event) {
+    event.preventDefault();
     history.pushState(null, null, "/gyms")
     $.get('/gyms.json').done((gyms) => {
-      $("#app-container").html('')
+      $("#gym-container").html('')
       gyms.forEach( function (gym) {
-        let newGym = new Gym(gym)
-        let gymHtml = newGym.formatIndex(admin)
-        $("#app-container").append(gymHtml)
-
-
+        let newGymInstance = new Gym(gym) 
+        let gymHtml = newGymInstance.formatGym(admin)
+        $("#gym-container").append(gymHtml)
+        if(!gym.reviews.length !== 0) {
+          $("#gym-container").append(newGymInstance.writeReview(admin))   
+        }
       })
-    })
+    });
   })
 
-  $(document).on("click", ".show-link", function(e) {
-    e.preventDefault()
-    let id = e.currentTarget.dataset.id;
+  $(document).on("click", "#learn-more", (event) => {
+    event.preventDefault();
+    let id = event.currentTarget.dataset.id;
     history.pushState(null, null, `/gyms/${id}`)
 
     $.get(`/gyms/${id}.json`).done((gym) => {
-      $("#app-container").html('')
+      $("#gym-container").html('')
       let newGym = new Gym(gym)
-      let newGymFormat = newGym.formatShow(admin)
-      $("#app-container").append(newGymFormat)
-      $("#app-container").append(newGym.formatReviews())
+      let newGymFormat = newGym.formatGymShow(admin)
+      $("#gym-container").append(newGymFormat)
+      $("#gym-container").append(newGym.formatReviews())
     })
   })
 
   $(document).on("click", '.next_gym', function() {
     let isAdmin = $('#admin').text();
-    $('#app-container').html("")
+    $('#gym-container').html("")
     let id = this.dataset.id
     $.get(`/gyms/${id}/next`).done(gym => {
     let buildGym = new Gym(gym)
-    let gymHtml = buildGym.formatShow(isAdmin)
-    $("#app-container").append(gymHtml)
-    $("#app-container").append(buildGym.formatReviews()) //add
+    let gymHtml = buildGym.formatGymShow(isAdmin)
+    $("#gym-container").append(gymHtml)
+    $("#gym-container").append(buildGym.formatReviews())
     })
   })
 
-  $("#new_review").on("submit", function(e) {
-    e.preventDefault();
+  $(document).on("click", '.previous_gym', function() {
+    let isAdmin = $('#admin').text();
+    $('#gym-container').html("")
+    let id = this.dataset.id
+    $.get(`/gyms/${id}/previous`).done(gym => {
+    let buildGym = new Gym(gym)
+    let gymHtml = buildGym.formatGymShow(isAdmin)
+    $("#gym-container").append(gymHtml)
+    $("#gym-container").append(buildGym.formatReviews())
+    })
+  })
+  
+  $(document).on("click", '.all_gym', function alphabetizeGym() {
+    let gymDivs = $(".gym_div")
+    let gymContainer = $("#gym-container")
+    gymContainer.html("")
+    gymDivs.sort(function(a, b) {
+      var nameA = a.firstElementChild.innerHTML.toUpperCase(); 
+      var nameB = b.firstElementChild.innerHTML.toUpperCase(); 
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    return 0;
+    })
+    debugger
+    for (let i = 0; i < gymDivs.length; i++) {
+      gymContainer.append(gymDivs[i])
+    };
+  })
+
+  // $(document).on("click", '.all_gym', function() {
+  //   console.log(gyms);
+  //   let gymDivs = $(".gym_div")
+  //   let gymContainer = $("#gym-container")
+  //   $('#gym-container').html("")
+  //   gymDivs.substr(0, 1) {}
+  //   let id = this.dataset.id
+  //   $.get(`/gyms/${id}/previous`).done(gym => {
+  //   let buildGym = new Gym(gym)
+  //   let gymHtml = buildGym.formatGymShow(isAdmin)
+  //   $("#gym-container").append(gymHtml)
+  //   $("#gym-container").append(buildGym.formatReviews())
+  //   })
+  // })
+
+  $("#new_review").on("submit", function(event) {
+    event.preventDefault();
     $.ajax({
-      method: "post",
+      type: "POST",
       url: this.action,
       data: $(this).serialize(),
       success: function(review) {
-
+          console.log(review)
         let formSelectBoxes = $("#new_review select")
 
         $.each(formSelectBoxes, function(i, box) {
@@ -63,7 +112,7 @@ const bindClickHandlers = () => {
         $("#new_review #review_complete_name").val("")
 
         var newReview = new Review(review);
-        $("#app-container").append(newReview.formatReview()) //add
+        $("#gym-container").append(newReview.formatReview())
       }
     })
   })
@@ -78,14 +127,14 @@ function Gym(gym) {
   this.users = gym.users
 }
 
-Gym.prototype.formatIndex = function(admin) {
+Gym.prototype.formatGym = function(admin) {
   let gymHtml = `
   <div class="gym_div">
   <h2>${this.name}</h2>
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
-  <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
-  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`} //add
+  <a id="learn-more" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`}
   ${admin === 'true' ? `<a href="/gyms/${this.id}/edit">Edit Gym</a>` : ''}
   ${admin === 'true' ? `<a href="/gyms/${this.id}" data-method="delete">Delete Gym</a>` : ''}
   </div>
@@ -94,16 +143,18 @@ Gym.prototype.formatIndex = function(admin) {
   return gymHtml
 }
 
-Gym.prototype.formatShow = function(admin) {
+Gym.prototype.formatGymShow = function(admin) {
   let gymHtml = `
   <div class="gym_div">
   <h2>${this.name}</h2>
   <h4><b>Location:</b> ${this.location} </h4>
   <h4><b>Classes:</b> ${this.classes} </h4>
-  <h4><b>Owner:</b> ${this.users[0].user_name}</h4>
-  <a id=".show-link" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
-  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`} //add
+  <h3><b>Owner:</b> ${this.users[0].user_name}</h3>
+  <a id="learn-more" data-id="${this.id}" href="/gyms/${this.id}">Click to Learn More</a>
+  ${admin === 'true' ? '' : `<a id="write-review" data-id="${this.id}" href="/gyms/${this.id}">Please Write a Review</a>`} 
+  <button class="previous_gym" data-id="${this.id}">Previous</button>
   <button class="next_gym" data-id="${this.id}">Next</button>
+  <button class="all_gym" data-id="${this.id}">All</button>
   </div>
   `
 
@@ -153,21 +204,21 @@ Gym.prototype.formatReviews = function () {
   return reviewsFolder
 }
 
-function findReviewOwner(gym) {
-  var reviewOwner = ""
+function findOwner(gym) {
+  var owner = ""
   gym.users.forEach(user => {
     if(user.admin === true) {
-      reviewOwner = user.user_name
+      owner = user.user_name
     }
   })
 
-  return reviewOwner
+  return owner
 }
 
 function Review(review) {
   this.id = review.id
   this.class_rating = review.class_rating
-  this. personal_training_rating = review.personal_training_rating
+  this.personal_training_rating = review.personal_training_rating
   this.cleanliness_rating = review.cleanliness_rating
   this.description = review.description
   this.user = review.user.user_name
@@ -182,7 +233,7 @@ Review.prototype.formatReview = function() {
   <h4><b>Personal Training Rating: ${this.personal_training_rating}</b></h4>
   <h4><b>Cleanliness Rating: ${this.cleanliness_rating}</b></h4>
   <h4><b>Description: ${this.description}</b></h4>
-  <h4><b>Reviewer: ${this.complete_name}</b></h4>
+  <h4><b>Reviewerer: ${this.complete_name}</b></h4>
   </div>
   `
 
@@ -191,21 +242,23 @@ Review.prototype.formatReview = function() {
 }
 
 const userClickHandlers = () => {
-  $("#user-profile").on("click", function (e) {
-    e.preventDefault();
-    $("#app-container").html("")
+  $("#user-profile").on("click", function (event) {
+    event.preventDefault();
+    $("#gym-container").html("")
     $.get(this.href).done(user => {
     history.pushState(null, null, `/users/${user.id}`)
-    $("#app-container").html("")
+    $("#gym-container").html("")
     $.get(`/users/${user.id}/gyms.json`).done(res => {
       res.forEach( function (gym) {
         var createGym = new Gym(gym)
         var formatRes = createGym.formatGym()
-        $("#app-container").append(formatRes)
+        $("#gym-container").append(formatRes)
  
-
+        if (!gym.reviews.length !== 0) {
+          $("#gym-container").append(createGym.writeReview())
+        }
         })
-      })  
+      });  
     })
   })
 }

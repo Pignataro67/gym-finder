@@ -34,4 +34,13 @@ class Gym < ApplicationRecord
       Gym.first
     end
   end
+
+  def previous
+    gym = Gym.where("id < ?", id).last
+    if gym
+      gym
+    else
+      Gym.last
+    end
+  end
 end
